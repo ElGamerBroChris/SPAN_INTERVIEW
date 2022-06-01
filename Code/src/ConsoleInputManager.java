@@ -17,6 +17,5 @@ public class ConsoleInputManager extends InputManager {
 				this.games.add(nextLine);
 			}
 		}while(!nextLine.equals("X"));
-		games.forEach(System.out::println);
 	}
 }

@@ -50,8 +50,50 @@ public class RankCalculator {
 		}
 		return leaguePoints;
 	}
-	public static List<List<String>> leaguePlacements(Map<String,Integer> games) {
-		List<List<String>> result=new LinkedList<List<String>>();
-		return result;
+	
+	public static void findAlphabeticalPosition(List<String> teamList,String team) {
+		boolean teamAdded = false;
+		for(int i=0;i<teamList.size();i++) {
+			if(teamList.get(i).compareTo(team)>0) {
+				teamList.add(i,team);
+				teamAdded = true;
+				break;
+			}
+		}
+		if(!teamAdded) {
+			teamList.add(team);
+		}
+	}
+	
+	public static List<List<String>> leaguePlacements(Map<String,Integer> teams) {
+		List<List<String>> rankings=new LinkedList<List<String>>();
+		for(String team:teams.keySet()) {
+			if(rankings.isEmpty()) {
+				List<String> firstPlace = new LinkedList<String>();
+				firstPlace.add(team);
+				rankings.add(firstPlace);
+			}
+			else {
+				for(int i=0;i<rankings.size();i++) {
+					List<String> teamList = rankings.get(i);
+					if(teams.get(teamList.get(0))==teams.get(team)) {
+						findAlphabeticalPosition(teamList,team);
+						break;
+					}
+					else if(teams.get(teamList.get(0))<teams.get(team)) {
+						List<String> newRank = new LinkedList<String>();
+						newRank.add(team);
+						rankings.add(i,newRank);
+						break;
+					}else if(i==rankings.size()-1) {
+						List<String> newRank = new LinkedList<String>();
+						newRank.add(team);
+						rankings.add(newRank);
+						break;
+					}
+				}
+			}
+		}
+		return rankings;
 	}
 }
