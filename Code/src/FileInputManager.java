@@ -6,10 +6,4 @@ public class FileInputManager extends InputManager {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void getPlacements() {
-		// TODO Auto-generated method stub
-
-	}
 }

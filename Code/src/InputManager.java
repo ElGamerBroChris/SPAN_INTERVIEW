@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Map;
 
 public abstract class InputManager {
 	
@@ -12,5 +13,10 @@ public abstract class InputManager {
 	/**
 	 * @implNote getPlacements will print out the league placements.
 	 */
-	public abstract void getPlacements();
+	public void getPlacements() {
+		Map<String,Integer> leaguePoints = RankCalculator.countLeaguePoints(this.games);
+		List<List<String>> ranking = RankCalculator.leaguePlacements(leaguePoints);
+		int numberOfTeams=0;
+		ranking.forEach(System.out::println);
+	};
 }
